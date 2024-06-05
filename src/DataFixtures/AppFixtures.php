@@ -6,13 +6,22 @@ use League\Csv\Reader;
 use App\Entity\Pokemon;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class AppFixtures extends Fixture
 {
+    private $params;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
+
     public function load(ObjectManager $manager): void
     {
         // Load the CSV 
-        $csv = Reader::createFromPath('%kernel.project_dir%/data/pokemon.csv', 'r');
+        $projectDir = $this->params->get('kernel.project_dir');
+        $csv = Reader::createFromPath($projectDir . '/data/pokemon.csv', 'r');        $csv->setHeaderOffset(0);
         $csv->setHeaderOffset(0);
 
         foreach ($csv as $line) {
