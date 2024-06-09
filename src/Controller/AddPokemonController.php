@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Pokemon;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 class AddPokemonController extends AbstractController
 {
@@ -16,6 +16,21 @@ class AddPokemonController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        // Vérifier les champs manquants
+        $requiredFields = ['name', 'type1', 'total', 'hp', 'attack', 'defense', 'sp_atk', 'sp_def', 'speed', 'generation', 'legendary'];
+        foreach ($requiredFields as $field) {
+            if (empty($data[$field]) && !isset($data[$field])) {
+                return new JsonResponse(['message' => "Le champ '$field' est manquant."], JsonResponse::HTTP_BAD_REQUEST);
+            }
+        }
+
+        // Vérifier si le Pokémon existe déjà
+        $existingPokemon = $em->getRepository(Pokemon::class)->findOneBy(['name' => $data['name']]);
+        if ($existingPokemon) {
+            return new JsonResponse(['message' => 'Le Pokémon existe déjà.'], JsonResponse::HTTP_CONFLICT);
+        }
+
+        // Créer et persister le nouveau Pokémon
         $pokemon = new Pokemon();
         $pokemon->setName($data['name']);
         $pokemon->setType1($data['type1']);

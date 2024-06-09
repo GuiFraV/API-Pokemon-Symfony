@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/ListAllPokemonController.php
 namespace App\Controller;
 
 use App\Entity\Pokemon;
@@ -45,6 +44,11 @@ class ListAllPokemonController extends AbstractController
                      ->setMaxResults($limit);
 
         $pokemons = $queryBuilder->getQuery()->getResult();
+
+        // Vérifier si des Pokémon sont trouvés
+        if (empty($pokemons)) {
+            return $this->json(['message' => 'Aucun Pokémon trouvé'], JsonResponse::HTTP_NOT_FOUND);
+        }
 
         // Créer un contexte de sérialisation et ajouter les groupes
         $context = SerializationContext::create()->setGroups(['list']);

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pokemon;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,12 +14,17 @@ class DeletePokemonController extends AbstractController
     public function deletePokemon(int $id, EntityManagerInterface $em): JsonResponse
     {
         $pokemon = $em->getRepository(Pokemon::class)->find($id);
+        
+        // Vérifier si le Pokémon existe
         if (!$pokemon) {
-            return $this->json(['message' => 'Pokemon not found'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->json(['message' => 'Pokémon introuvable'], JsonResponse::HTTP_NOT_FOUND);
         }
+
+        // Supprimer le Pokémon
         $em->remove($pokemon);
         $em->flush();
 
-        return $this->json(['message' => 'Pokemon deleted'], JsonResponse::HTTP_OK);
+        return $this->json(['message' => 'Pokémon supprimé'], JsonResponse::HTTP_OK);
     }
 }
+

@@ -15,12 +15,16 @@ class GetPokemonController extends AbstractController
     public function getPokemon(int $id, EntityManagerInterface $em, SerializerInterface $serializer): JsonResponse
     {
         $pokemon = $em->getRepository(Pokemon::class)->find($id);
+        
+        // Vérifier si le Pokémon existe
         if (!$pokemon) {
-            return $this->json(['message' => 'Pokemon not found'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->json(['message' => 'Pokémon introuvable'], JsonResponse::HTTP_NOT_FOUND);
         }
 
+        // Sérialiser et retourner le Pokémon
         $data = $serializer->serialize($pokemon, 'json');
 
         return new JsonResponse($data, JsonResponse::HTTP_OK, [], true);
     }
 }
+
