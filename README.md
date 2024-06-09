@@ -1,8 +1,8 @@
 | Element          | Status |
 | ---------------- | ------ |
-| Fixtures         | Done   |
-| Authentification | Done   |
-| Features         | Done   |
+| Fixtures         | ✅     |
+| Authentification | ✅     |
+| Features         | ✅     |
 
 ## Comment tester l'API ?
 
