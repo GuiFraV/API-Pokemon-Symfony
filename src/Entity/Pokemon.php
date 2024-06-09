@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PokemonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PokemonRepository;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
 class Pokemon
@@ -12,50 +13,64 @@ class Pokemon
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Serializer\Groups(["list", "detail"])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Serializer\Groups(["list", "detail"])]
     private ?string $type1 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Serializer\Groups(["list", "detail"])]
     private ?string $type2 = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $total = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $hp = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $attack = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $defense = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $sp_atk = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $sp_def = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $speed = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?int $generation = null;
 
     #[ORM\Column]
+    #[Serializer\Groups(["list", "detail"])]
     private ?bool $legendary = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Serializer\Groups(["list", "detail"])]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Serializer\Groups(["list", "detail"])]
     private ?\DateTimeInterface $updated_at = null;
-
     public function getId(): ?int
     {
         return $this->id;

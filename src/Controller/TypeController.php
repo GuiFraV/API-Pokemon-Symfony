@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class TypeController extends AbstractController
 {
-    #[Route('/api/types', name: 'get_types', methods: ['GET'])]
+    #[Route('/types', name: 'get_types', methods: ['GET'])]
     public function getTypes(EntityManagerInterface $em): JsonResponse
     {
         $types = $em->getRepository(Pokemon::class)->findAllTypes();
