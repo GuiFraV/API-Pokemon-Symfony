@@ -29,7 +29,7 @@
 
 ### 3. Utiliser le JWT Token
 
-- Inclure la réponse dans le Header
+- Inclure le token dans le Header
 
 Liste des Endpoints :
 
