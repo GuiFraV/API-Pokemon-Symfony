@@ -11,6 +11,7 @@
 - `git clone`
 - `composer install`
 - Configurer `DATABASE_URL` dans `.env`
+- `symfony console doctrine:fixtures:load`
 - `symfony serve`
 
 ### 2. Obtenir le JWT Token
