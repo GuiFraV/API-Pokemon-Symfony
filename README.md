@@ -25,7 +25,7 @@
 ###> lexik/jwt-authentication-bundle ###
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE=2cf7d8cb8824f6d45b75a75a2945fda2e7e55420a5db135603410ed13acca4e4
+JWT_PASSPHRASE=my_secure_passphrase
 ###< lexik/jwt-authentication-bundle ###
 ```
 
