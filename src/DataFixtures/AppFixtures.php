@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
 
         // Load User
         $user = new User();
-        $user->setEmail('user@exemple.com');
+        $user->setEmail('user@example.com');
         $user->setPassword('$2y$13$8lB0oG7Echs8X9Fv1yoYWOk8F6.hd7UeCl1h1CaeiWUUrSvEn29ei');
         $user->setRoles(["ROLE_USER"]);
 
