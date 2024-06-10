@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use League\Csv\Reader;
 use App\Entity\Pokemon;
 use Doctrine\Persistence\ObjectManager;
@@ -43,6 +44,14 @@ class AppFixtures extends Fixture
             
             $manager->persist($pokemon);
         }
+
+        // Load User
+        $user = new User();
+        $user->setEmail('user@exemple.com');
+        $user->setPassword('$2y$13$8lB0oG7Echs8X9Fv1yoYWOk8F6.hd7UeCl1h1CaeiWUUrSvEn29ei');
+        $user->setRoles(["ROLE_USER"]);
+
+        $manager->persist($user);
         
         $manager->flush();
     }
