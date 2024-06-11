@@ -42,7 +42,7 @@ JWT_PASSPHRASE=my_secure_passphrase
 
 ### 3. Utiliser le JWT Token
 
-- Inclure le token dans le Header
+- Inclure le token dans le Header : Par exemple, dans POSTMAN -> Go to `Headers` puis dans la partie `Key` ajouter "Authorization", puis dans la `Value` mettez y le token
 
 Liste des Endpoints :
 
